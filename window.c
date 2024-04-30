@@ -12,19 +12,19 @@ static void keydown(int keycode);
 /*!\brief tableau contenant les animations sous la forme de timeline */
 static GL4DHanime _animations[] = {
 	{ 1200, animation_vide, spectre, transition_fondu },
-	{ 5000, spectre, gravity_wave, transition_fondu },
+	{ 3000, spectre, gravity_wave, transition_fondu },
 	{ 8000, gravity_wave, wave, transition_fondu },
-	{ 3000, wave, NULL, transition_fondu },
-	{ 3000, sun_sphere, sphere, transition_fondu },
-	{ 5000, sphere, audio_analyzer, transition_fondu },
+	{ 4000, wave, sun_sphere, transition_fondu },
+	{ 5000, sun_sphere, sphere, transition_fondu },
+	{ 4500, sphere, audio_analyzer, transition_fondu },
 	{ 1000, audio_analyzer, sun_wave, transition_fondu },
 	{ 4000, sun_wave, red, transition_fondu },
 	{ 1000, red, sun, transition_fondu },
-	{ 3000, sun, wave2, transition_fondu },
-	{ 3000, wave2, blue, transition_fondu },
-	{ 2000, spectre, NULL, transition_fondu },
-	{ 3000, strip, NULL, NULL },
-	{ 2000, blue, credit_fin, transition_fondu },
+	{ 2500, sun, red, transition_fondu },
+	{ 3000, sound_sphere, wave2, transition_fondu },
+	{ 3000, wave2, spectre, transition_fondu },
+	{ 1000, spectre, red, transition_fondu },
+	{ 2000, red, credit_fin, transition_fondu },
 	{15000, credit_fin, NULL, NULL },
 	{    0, NULL, NULL, NULL }
 };

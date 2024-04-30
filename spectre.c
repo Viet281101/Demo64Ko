@@ -9,6 +9,7 @@ static void draw(void);
 #define NB_E 1024
 static GLuint _wW = 1024, _wH = 768;
 static GLuint _cubeId = 0, _pId = 0, _quad = 0;
+static float max_height = 1.0;
 static int _hauteurs[NB_E];
 void spectre(int state) {
 	switch(state) {
@@ -52,6 +53,7 @@ void draw(void) {
 	glClearColor(0, 0, 0, 255);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glUseProgram(_pId);
+	glUniform1f(glGetUniformLocation(_pId, "maxHeight"), max_height);
 	gl4duBindMatrix("modelView");
 	gl4duLoadIdentityf();
 	gl4duTranslatef(0.0f, 0.0f, -1.1f);

@@ -36,6 +36,7 @@ void init(void) {
 	SDL_Color c = {255, 255, 255, 255};
 	_quadId = gl4dgGenQuadf();
 	_pId = gl4duCreateProgram("<vs>shaders/texte.vs", "<fs>shaders/texte.fs", NULL);
+	if(!_pId) { fprintf(stderr, "Error creating shader program\n"); exit(1); }
 	/* initialiser la lib SDL2_ttf */
 	if(TTF_Init() == -1) {
 		fprintf(stderr, "TTF_Init: %s\n", TTF_GetError()); exit(2);

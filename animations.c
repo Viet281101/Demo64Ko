@@ -87,17 +87,6 @@ void green(int state) {
 		return;
 	}
 }
-void blue(int state) {
-	switch(state) {
-	case GL4DH_INIT: return;
-	case GL4DH_FREE: gl4dpDeleteScreen(); return;
-	case GL4DH_UPDATE_WITH_AUDIO: return;
-	default:
-		glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		return;
-	}
-}
 void red(int state) {
 	switch(state) {
 	case GL4DH_INIT: return;
@@ -141,6 +130,38 @@ void audio_analyzer(int state) {
 		gl4dpLine(x0, y0, x1, y1);
 		} 
 		gl4dpUpdateScreen(NULL);
+		return;
+	}
+}
+void sound_sphere(int state) {
+	int l, i; Sint16 * s;
+	GLint rect[4], tr, mr;
+	static int r = 0, or = 0;
+	static GLuint screen_id;
+	switch(state) {
+	case GL4DH_INIT: screen_id = gl4dpInitScreen(); gl4dpUpdateScreen(NULL); return;
+	case GL4DH_FREE: gl4dpSetScreen(screen_id); gl4dpDeleteScreen(); return;
+	case GL4DH_UPDATE_WITH_AUDIO:
+		s = (Sint16 *)ahGetAudioStream();
+		l = ahGetAudioStreamLength();
+		for(i = 0, tr = 0; i < l >> 1; i++)
+		tr += abs(s[i]);
+		tr /= l >> 1;
+		r = 100 + 2 * (tr >> 4);
+		return;
+	default:
+		tr = r; mr = MAX(tr, or) + 1;
+		gl4dpSetScreen(screen_id);
+		rect[0] = MAX((gl4dpGetWidth()  >> 1) - mr, 0);
+		rect[1] = MAX((gl4dpGetHeight() >> 1) - mr, 0);
+		rect[2] = MIN(mr << 1,  gl4dpGetWidth() - rect[0]);
+		rect[3] = MIN(mr << 1, gl4dpGetHeight() - rect[1]);
+		gl4dpSetColor(RGB(0, 0, 0));
+		gl4dpRect(rect);
+		gl4dpSetColor(RGB(255, 51, 25));
+		gl4dpFilledCircle(gl4dpGetWidth() >> 1, gl4dpGetHeight() >> 1, tr);
+		gl4dpUpdateScreen(rect);
+		or = tr;
 		return;
 	}
 }
@@ -202,10 +223,5 @@ void wave2(int state) {
 	static Anim anim = {0};
 	setupAnim(state, "<fs>shaders/wave2.fs", &anim);
 	if (state == GL4DH_DRAW) { runAnim(&anim, 1.0f); }
-}
-void strip(int state) {
-	static Anim anim = {0};
-	setupAnim(state, "<fs>shaders/strip.fs", &anim);
-	if (state == GL4DH_DRAW) { runAnim(&anim, 3.0f); }
 }
 void animationsInit(void) { if(!_quadId) _quadId = gl4dgGenQuadf(); }
