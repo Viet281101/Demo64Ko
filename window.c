@@ -53,8 +53,7 @@ static void init(void) {
 	resize(_dim[0], _dim[1]);
 }
 /*!\brief paramétre la vue (viewPort) OpenGL en fonction des dimensions de la fenêtre.
- * \param w largeur de la fenêtre.
- * \param w hauteur de la fenêtre.*/
+ * \param w largeur de la fenêtre. \param w hauteur de la fenêtre.*/
 static void resize(int w, int h) {
 	_dim[0] = w; _dim[1] = h;
 	glViewport(0, 0, _dim[0], _dim[1]);

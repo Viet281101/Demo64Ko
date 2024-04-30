@@ -78,13 +78,11 @@ void green(int state) {
 		double m = 0.0;
 		for(i = 0; i < l / 2; ++i)
 		m += fabs(s[i] / (double)(1 << 15));
-		mp = m / (l / 2);
-		return;
+		mp = m / (l / 2); return;
 	}
 	default:
 		glClearColor(0.0f, 5.0f * mp, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		return;
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); return;
 	}
 }
 void red(int state) {
@@ -94,8 +92,7 @@ void red(int state) {
 	case GL4DH_UPDATE_WITH_AUDIO: return;
 	default:
 		glClearColor(0.37f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		return;
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); return;
 	}
 }
 void audio_analyzer(int state) {
@@ -122,10 +119,8 @@ void audio_analyzer(int state) {
 		gl4dpClearScreen(); 
 		for(i = 0; i < 256 - 1; i++) { 
 		int x0, y0, x1, y1;
-		x0 = (i * (w - 1)) / (256 - 1); 
-		y0 = t[i]; 
-		x1 = ((i + 1) * (w - 1)) / (256 - 1); 
-		y1 = t[i + 1]; 
+		x0 = (i * (w - 1)) / (256 - 1); y0 = t[i]; 
+		x1 = ((i + 1) * (w - 1)) / (256 - 1); y1 = t[i + 1];
 		gl4dpSetColor(rand());
 		gl4dpLine(x0, y0, x1, y1);
 		} 

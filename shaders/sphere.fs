@@ -2,8 +2,7 @@
 uniform float time;
 uniform vec2 resolution;
 out vec4 fragColor;
-float makePoint(float x,float y,float fx,float fy,float sx,float sy,float t, float s)
-{
+float makePoint(float x,float y,float fx,float fy,float sx,float sy,float t, float s) {
 	float xx=x+sin(t*fx)*sx;
 	float yy=y+cos(t*fy)*sy;
 	return ((s/3.0)/((0.007/s)+sqrt(xx*xx+yy*yy)));
